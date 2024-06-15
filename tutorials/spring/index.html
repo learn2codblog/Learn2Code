@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spring Tutorials</title>
+    <link rel="stylesheet" href="../../docs/style.css"> <!-- Updated path -->
+</head>
+<body>
+    <header>
+        <h1>Spring Tutorials</h1>
+        <nav>
+            <a href="../../docs/index.html">Home</a> <!-- Updated path -->
+            <a href="../index.html">Tutorials</a> <!-- Updated path -->
+            <a href="index.html">Spring</a>
+        </nav>
+    </header>
+    <main>
+        <h2>Spring Bean</h2>
+        <p>Written by Pradeep Kumar</p>
+  
+        <p>A Spring Bean is an object that is managed by the Spring IoC (Inversion of Control) container. Beans are the backbone of a Spring-based application; they are the objects that form the core of your application and are managed by the Spring framework. The Spring IoC container is responsible for instantiating, configuring, and assembling these beans.</p>
+        <h3>Key Concepts of Spring Beans:</h3>
+        <ul>
+            <li><strong>Definition:</strong> A bean is an object that is instantiated, assembled, and otherwise managed by a Spring IoC container. Beans are created from configuration metadata that you provide to the container, for example, in the form of XML configuration, Java annotations, or Java code.</li>
+            <li><strong>Scope:</strong>
+                <ul>
+                    <li>Singleton (default): A single instance of the bean is created and shared throughout the Spring container.</li>
+                    <li>Prototype: A new instance is created every time the bean is requested.</li>
+                    <li>Other scopes: request, session, application, and websocket, primarily used in web-aware applications.</li>
+                </ul>
+            </li>
+            <li><strong>Lifecycle:</strong> The lifecycle of a Spring bean is managed by the container. The typical lifecycle includes:
+                <ul>
+                    <li>Instantiation: The bean is created.</li>
+                    <li>Dependency Injection: Dependencies are injected into the bean.</li>
+                    <li>Initialization: Custom initialization methods can be invoked.</li>
+                    <li>Usage: The bean is ready to be used.</li>
+                    <li>Destruction: The bean is destroyed when the container is closed.</li>
+                </ul>
+            </li>
+        </ul>
+        <h3>Declaring a Spring Bean</h3>
+        <p>Beans can be declared in various ways in Spring:</p>
+        <ol>
+            <li><strong>Using XML Configuration:</strong>
+                <pre><code>&lt;bean id="myBean" class="com.example.MyBeanClass"/&gt;</code></pre>
+            </li>
+            <li><strong>Using Java Annotations:</strong>
+                <ul>
+                    <li>@Component: Generic stereotype for any Spring-managed component.</li>
+                    <li>@Service: Indicates that an annotated class is a "Service" (business service facade or service layer).</li>
+                    <li>@Repository: Indicates that an annotated class is a "Repository" (data access layer).</li>
+                    <li>@Controller: Indicates that an annotated class is a "Controller" (presentation layer).</li>
+                    <li>@Configuration: Indicates that a class declares one or more @Bean methods.</li>
+                    <li>@Bean: Indicates that a method produces a bean to be managed by the Spring container.</li>
+                </ul>
+                <pre><code>import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+@Configuration
+public class AppConfig {
+    @Bean
+    public MyBeanClass myBean() {
+        return new MyBeanClass();
+    }
+}</code></pre>
+            </li>
+            <li><strong>Using Java Configuration (Java-based Configuration):</strong>
+                <p>Spring provides a way to define beans using Java code, which is often considered type-safe and refactor-friendly.</p>
+                <pre><code>import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+@Configuration
+public class AppConfig {
+    @Bean
+    public MyBeanClass myBean() {
+        return new MyBeanClass();
+    }
+}</code></pre>
+                <p>Example Bean with Annotations</p>
+                <pre><code>package com.example;
+
+import org.springframework.stereotype.Component;
+
+@Component
+public class MyBeanClass {
+    public void doSomething() {
+        System.out.println("Doing something...");
+    }
+}</code></pre>
+                <p>MainApplication.java</p>
+                <pre><code>package com.example;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.ApplicationContext;
+
+@SpringBootApplication
+public class MainApplication {
+    public static void main(String[] args) {
+        ApplicationContext context = SpringApplication.run(MainApplication.class, args);
+        MyBeanClass myBean = context.getBean(MyBeanClass.class);
+        myBean.doSomething();
+    }
+}</code></pre>
+                <p>In this example:</p>
+                <ul>
+                    <li>@Component marks MyBeanClass as a Spring bean.</li>
+                    <li>MainApplication retrieves the bean from the Spring context and uses it.</li>
+                </ul>
+                <h3>Summary</h3>
+                <p>A Spring Bean is an essential building block in a Spring application, managed by the Spring IoC container. Beans can be declared using XML, Java annotations, or Java configuration, and they have a lifecycle managed by the Spring container.</p>
+            </li>
+        </ol>
+        <h3>What is RestController Annotation</h3>
+        <p>The @RestController annotation in Spring is a specialized version of the @Controller annotation. It is used to create RESTful web services using Spring MVC. This annotation is shorthand for @Controller and @ResponseBody combined. When you annotate a class with @RestController, it indicates that the class is a web controller, and all the methods in the class will return data directly to the caller in a suitable format (like JSON or XML) rather than rendering a view.</p>
+        <h3>Key Characteristics of @RestController</h3>
+        <ul>
+            <li>Combines @Controller and @ResponseBody:
+                <ul>
+                    <li>@Controller indicates that the class serves web requests.</li>
+                    <li>@ResponseBody indicates that the return value of a method should be written directly to the HTTP response body as JSON or XML.</li>
+                </ul>
+            </li>
+            <li>RESTful Services: It is typically used to create RESTful web services where the returned data is serialized into JSON or XML.</li>
+        </ul>
+        <h3>Example</h3>
+        <pre><code>import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework
+</code></pre>
